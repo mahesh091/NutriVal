@@ -1,0 +1,81 @@
+{% extends "base.html" %} {% block body %}
+<nav class="navbar navbar-expand-lg  sticky-top fixed-top navbar-dark bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand logo" href="/">Nutrival Home</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+  <span class="navbar-toggler-icon"></span>
+</button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/add_days">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="/food">Add Food Item</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link active" href="/about">About Blog</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="banner"></div>
+<div class="p-3"></div>
+<div class="container jumbotron theme-showcase col-sm-6 col-sm-offset-3" role="main">
+
+    <div class="row">
+
+        <div class="panel panel-primary">
+
+            <div class="panel-heading">
+                <h2 class="panel-title">Foods</h2>
+            </div>
+
+            <div class="panel-body">
+
+                <form method="POST" action="{{ url_for('food') }}">
+                    <div class="form-group">
+                        <label for="food-name">Food Name</label>
+                        <input type="text" class="form-control" id="food-name" name="food-name" placeholder="Food Name">
+                    </div>
+                    <div class="form-group">
+                        <label for="protein">Protein</label>
+                        <input type="number" class="form-control" id="protein" name="protein" placeholder="Protein">
+                    </div>
+                    <div class="form-group">
+                        <label for="carbohydrates">Carbohydrates</label>
+                        <input type="number" class="form-control" id="carbohydrates" name="carbohydrates" placeholder="Carbohydrates">
+                    </div>
+                    <div class="form-group">
+                        <label for="fat">Fat</label>
+                        <input type="number" class="form-control" id="fat" name="fat" placeholder="Fat">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Add</button>
+                </form>
+
+                <div class="page-header">
+
+                    {% for food in results %}
+                    <hr>
+                    <!--loop takes results and food.type gives value in it-->
+                    <ul class="nav nav-pills" role="tablist">
+                        <li class="active"><a><b><u>{{ food.name }}</u>:</b></a></li>
+                        <li><a>Protein: <span class="badge">{{ food.protein }}</span></a></li>
+                        <li><a>Carbohydrates: <span class="badge">{{ food.carbohydrates }}</span></a></li>
+                        <li><a>Fat: <span class="badge">{{ food.fat }}</span></a></li>
+                        <li><a>Calories: <span class="badge">{{ food.calories }}</span></a></li>
+                    </ul>
+
+                    <div class="page-header"></div>
+
+                    {% endfor %}
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    {% endblock %}
